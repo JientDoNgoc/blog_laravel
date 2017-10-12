@@ -12,22 +12,24 @@ Route::get('about', function () {
     return view('other.about');
 })->name('other.about');
 
-Route::get('admin/create', function () {
-    return view('admin.create');
-})->name('admin.create');
+Route::group(['prefix' => 'admin'], function() {
+	Route::get('admin/create', function () {
+	    return view('admin.create');
+	})->name('admin.create');
 
-Route::post('admin/create', function () {
-    return "It works!!!";
-})->name('admin.create');
+	Route::post('admin/create', function () {
+	    return "It works!!!";
+	})->name('admin.create');
 
-Route::get('admin', function () {
-    return view('admin.index');
-})->name('admin.index');
+	Route::get('admin', function () {
+	    return view('admin.index');
+	})->name('admin.index');
 
-Route::get('admin/edit/{id}', function () {
-    return view('admin.edit');
-})->name('admin.edit');
+	Route::get('admin/edit/{id}', function () {
+	    return view('admin.edit');
+	})->name('admin.edit');
 
-Route::post('admin/update', function () {
-    return view('admin.update');
-})->name('admin.update');
+	Route::post('admin/update', function () {
+	    return "It works!!!";
+	})->name('admin.update');
+)};
