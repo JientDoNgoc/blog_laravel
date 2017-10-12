@@ -13,6 +13,11 @@ Route::get('about', function () {
 })->name('other.about');
 
 Route::group(['prefix' => 'admin'], function() {
+	
+	Route::get('', function () {
+	    return view('admin.index');
+	})->name('admin.index');
+
 	Route::get('admin/create', function () {
 	    return view('admin.create');
 	})->name('admin.create');
@@ -21,10 +26,6 @@ Route::group(['prefix' => 'admin'], function() {
 	    return "It works!!!";
 	})->name('admin.create');
 
-	Route::get('admin', function () {
-	    return view('admin.index');
-	})->name('admin.index');
-
 	Route::get('admin/edit/{id}', function () {
 	    return view('admin.edit');
 	})->name('admin.edit');
@@ -32,4 +33,4 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::post('admin/update', function () {
 	    return "It works!!!";
 	})->name('admin.update');
-)};
+});
