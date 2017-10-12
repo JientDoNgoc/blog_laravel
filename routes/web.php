@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin'], function() {
     	]);
     	if($validation->fails())
     		return redirect()->back()->withErrors($validation);
-      return redirect()
+		return redirect()
         ->route('admin.index')
         ->with('info','Post created, Title ' . $request->input('title'));
     })->name('admin.create');
