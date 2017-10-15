@@ -13,6 +13,7 @@
                     <label for="content">Content</label>
                     <input type="text" class="form-control" id="content" name="content" value ="{{$post['content']}}">
                 </div>
+                <input type="hidden" name="id" value="{{ $postId }}">
                 <button type="submit" class="btn btn-primary">Submit</button>
                  {{ csrf_field() }}
             </form>

@@ -1,24 +1,44 @@
 <?php
 
-Route::get('/', 'PostController@getIndex')->name('blog.index');
-Route::get('post/{id}', function ($id) {
-    if($id == 1)
-    {
-        $post = [
-                'title' => 'Learning Laravel',
-                'content' => 'This blog post will get you right on track with Laravel'
-        ];
-    }else{
-        $post = [
-                        'title' => 'Something else',
-                        'content' => 'Some other content'
-                ];
-    }
-    return view('blog.post', ['post' => $post]);
-})->name('blog.post');
+Route::get('/', [
+    'uses' => 'PostController@getIndex',
+    'as' => 'blog.index'
+]);
+
+Route::get('post/{id}', [
+    'uses' => 'PostController@getPost',
+    'as' => 'blog.post'
+]);
+
 Route::get('about', function () {
     return view('other.about');
 })->name('other.about');
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('', [
+        'uses' => 'PostController@getAdminIndex',
+        'as' => 'admin.index'
+    ]);
+    Route::get('create', [
+        'uses' => 'PostController@getAdminCreate',
+        'as' => 'admin.create'
+    ]);
+    Route::Post('create', [
+        'uses' => 'PostController@postAdminCreate',
+        'as' => 'admin.create'
+    ]);
+    Route::Get('edit/{id}', [
+        'uses' => 'PostController@getAdminEdit',
+        'as' => 'admin.edit'
+    ]);
+    
+    Route::Post('edit', [
+        'uses' => 'PostController@postAdminUpdate',
+        'as' => 'admin.update'
+    ]);
+});
+
+/*
 Route::group(['prefix' => 'admin'], function() {
     Route::get('', function () {
         return view('admin.index');
@@ -64,6 +84,8 @@ Route::group(['prefix' => 'admin'], function() {
         ->with('info','Post editted, new Title ' . $request->input('title'));
     })->name('admin.update');
 });
+*/
+
 
 /*
 Route::get('/', function () {
